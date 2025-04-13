@@ -7,8 +7,8 @@ oracledb.initOracleClient({
 async function initPool() {
   try {
     await oracledb.createPool({
-      user: 's2023103501',
-      password: 'QSUQAZNR',
+      user: 's2023103507',
+      password: 'DWTQCPVR',
       connectString: 'localhost:31521/sfldb2.sfdc.audcse',
       poolMin: 2,
       poolMax: 10,
