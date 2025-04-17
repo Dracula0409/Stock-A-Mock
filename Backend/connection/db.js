@@ -13,7 +13,7 @@ async function initPool() {
       connectString: process.env.DB_CONNECTION_STRING,
       //poolMin: 2,
       //poolMax: 10,
-      //poolIncrement: 1
+      //poolIncrement: 1  --> Some issue with this piece of code
     });
     console.log("📘 Oracle connection pool created.");
   } catch (err) {
