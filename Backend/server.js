@@ -6,7 +6,7 @@ const stockRoutes = require('./routes/stock');
 const txnRoutes = require('./routes/transaction');
 */
 require('dotenv').config();
-//require('./jobs/stockUpdater');
+require('./jobs/stockUpdater');
 const port = 3000;
 
 const app = express();
