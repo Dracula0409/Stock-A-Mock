@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../auth');
-const { transact, getPortfolio, getCAGR } = require('../controllers/transactionController');
+const transactionController = require('../controllers/transactionController');
 
-//router.post('/', auth, transact);
-router.get('/portfolio', auth, getPortfolio);
-router.get('/cagr', auth, getCAGR);
+router.post('/buy', transactionController.buyStock);
+router.post('/sell', transactionController.sellStock);
 
 module.exports = router;
