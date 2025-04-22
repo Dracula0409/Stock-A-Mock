@@ -4,6 +4,7 @@ exports.getPortfolio = async (req, res) => {
   const { userId } = req.params;
 
   try {
+    const connection = await oracledb.getConnection();
     // Fetch user holdings
     const result = await connection.execute(
       `SELECT uh.SYMBOL, uh.QUANTITY, uh.AVERAGE_PRICE,

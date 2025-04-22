@@ -4,7 +4,7 @@ exports.buyStock = async (req, res) => {
   const { account_id, stock_id, symbol, quantity, price } = req.body;
 
   try {
-    const connection = await oracledb.getConnection(dbConfig);
+    const connection = await oracledb.getConnection();
     await connection.execute(
       `BEGIN buy_stock(:account_id, :stock_id, :symbol, :quantity, :price); END;`,
       { account_id, stock_id, symbol, quantity, price }
@@ -21,7 +21,7 @@ exports.sellStock = async (req, res) => {
   const { account_id, stock_id, symbol, quantity, price } = req.body;
 
   try {
-    const connection = await oracledb.getConnection(dbConfig);
+    const connection = await oracledb.getConnection();
     await connection.execute(
       `BEGIN sell_stock(:account_id, :stock_id, :symbol, :quantity, :price); END;`,
       { account_id, stock_id, symbol, quantity, price }

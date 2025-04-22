@@ -8,7 +8,25 @@ const app = express();
 const db = require('./connection/db'); // Import your DB module
 const port = 3000;
 
-app.use(cors());
+const allowedOrigins = [
+  "http://localhost:5173", 
+  "http://10.7.103.226:5173",
+  "http://10.5.12.254:5173",
+  "http://192.168.1.200:5173"
+];
+
+app.use(cors({
+  origin : (origin, callback) => {
+    if(!origin || allowedOrigins.includes(origin)){
+      callback(null, true);
+    }
+    else{
+      callback(new Error("Not Allowed by CORS."));
+    }
+  },
+  credentials: true, 
+}));
+
 app.use(express.json());
 
 const userRoutes = require('./routes/user');
