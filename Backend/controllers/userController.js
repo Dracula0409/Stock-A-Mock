@@ -2,6 +2,28 @@ const oracledb = require('oracledb');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+exports.checkEmail = async (req, res) => {
+  const {email} = req.body;
+  const conn = await oracledb.getConnection();
+  try {
+    const result = await conn.execute(
+      `SELECT user_id FROM Users WHERE email = :email`,
+      [email]
+    );
+
+    // If the email exists, return true
+    const emailExists = result.rows.length > 0;
+    res.json({ exists: emailExists });
+  } catch (err) {
+    throw new Error(err.message);
+  } finally {
+    // Ensure the connection is closed
+    if (conn) {
+      await conn.close();
+    }
+  }
+};
+
 exports.register = async (req, res) => {
   const { username, email, password } = req.body;
   const conn = await oracledb.getConnection();
@@ -14,6 +36,7 @@ exports.register = async (req, res) => {
     );
     res.status(201).json({ msg: "User registered" });
   } catch (err) {
+    console.error("Register Error:", err);
     res.status(500).json({ error: err.message });
   }
 };
@@ -33,7 +56,7 @@ exports.login = async (req, res) => {
     if (!match) return res.status(401).json({ error: "Incorrect password" });
 
     const token = jwt.sign({ user_id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.json({ token });
+    res.json({ message: "success", token });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

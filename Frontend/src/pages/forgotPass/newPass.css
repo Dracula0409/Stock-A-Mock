@@ -1,0 +1,134 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  .pass-box {
+    background: white;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+  }
+  
+  .pass-box label {
+    display: block;
+    text-align: left;
+    margin: 15px 0 5px;
+    font-weight: 600;
+  }
+  
+  .pass-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border: 2px solid #ccc;
+    border-radius: 7px;
+    font-size: 16px;
+    transition: border 0.2s ease-in-out;
+  }
+  
+  .pass-box input:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .checkbox-container {
+    display: flex;
+    align-items: center;
+    margin: 18px 0;
+    font-size: 14px;
+  }
+  
+  .checkbox-container input {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+  }
+  
+  .checkbox-container label {
+    margin: 0;
+    color: #333;
+  }
+  
+  .checkbox-container a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 4px;
+  }
+  
+  .checkbox-container a:hover {
+    text-decoration: underline;
+  }
+  
+  .errorMessage {
+    color: red;
+    font-size: 14px;
+    margin: 6px 0 10px;
+    text-align: left;
+  }
+  
+  .reset-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 17px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .reset-btn:hover:not(:disabled) {
+    background-color: #0056b3;
+  }
+  
+  .reset-btn:disabled {
+    background-color: gray;
+    cursor: not-allowed;
+  }
+  
+  .checklist {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 10px;
+    text-align: left;
+  }
+  
+  .checklist li {
+    font-size: 14px;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .checklist li::before {
+    content: '✓';
+    display: inline-block;
+    margin-right: 8px;
+    color: green;
+    font-weight: bold;
+  }
+  
+  .checklist li.invalid::before {
+    content: '✖';
+    color: red;
+  }
+  .checklist li.invalid {
+    color: red;
+  }
+  
+  .checklist li.valid {
+    color: green;
+  }

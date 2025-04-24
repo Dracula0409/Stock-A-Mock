@@ -1,7 +1,7 @@
 const oracledb = require('oracledb');
 
 exports.getPortfolio = async (req, res) => {
-  const { userId } = req.params;
+  const userId = req.user.user_id;
 
   try {
     const connection = await oracledb.getConnection();

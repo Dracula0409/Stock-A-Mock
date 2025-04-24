@@ -12,20 +12,20 @@ function StartPage() {
     }
 
     return (
-        <div class='webPageBody'>
-            <div class='container'>
+        <div className='webPageBody'>
+            <div className='container'>
 
-                <div class='welcome'>
-                    <h1 class='title'>Stock-A-Mock</h1>
-                    <h3 class='welcome-msg'>What will be it today? A bull run or bear run...</h3>
-                    <span class='Enter-App'>
+                <div className='welcome'>
+                    <h1 className='title'>Stock-A-Mock</h1>
+                    <h3 className='welcome-msg'>What will be it today? A bull run or bear run...</h3>
+                    <span className='Enter-App'>
                         <p>Already Been Here? Welcome back!</p>
-                        <button class='login-btn' onClick={HandleLogin}>Login</button>
+                        <button className='login-btn' onClick={HandleLogin}>Login</button>
                         <p>But you'll have to prove yourself first...</p>
                     </span>
-                    <span class='New-App'>
+                    <span className='New-App'>
                         <p>New Here? Say no more!</p>
-                        <button class='signup-btn' onClick={HandleSignUp}>Sign up</button>
+                        <button className='signup-btn' onClick={HandleSignUp}>Sign up</button>
                         <p>It's Free...</p>
                     </span>
                 </div>

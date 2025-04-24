@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+    color: #f0f0f0;
+  }
+  
+  .dashboard {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+  }
+  
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #ffcc00;
+    padding-bottom: 1rem;
+  }
+  
+  .title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ffcc00;
+  }
+  
+  .btn-group {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 12px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  
+  .buy    { background-color: #2563eb; }
+  .sell   { background-color: #22c55e; }
+  .search { background-color: #eab308; }
+  .account{ background-color: #6b7280; }
+  
+  .btn:hover {
+    transform: scale(1.05);
+    opacity: 0.95;
+  }
+  
+  .loading, .error {
+    font-size: 1.2rem;
+    padding: 2rem;
+  }
+  
+  .error {
+    color: #ff6b6b;
+  }
+  
+  .no-holdings {
+    font-size: 1.2rem;
+    margin-top: 2rem;
+  }
+  
+  .link {
+    color: #60a5fa;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  
+  .holdings-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  
+  .holdings-table th, .holdings-table td {
+    padding: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+  }
+  
+  .holdings-table thead {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffd700;
+  }
+  
+  .table-row:hover {
+    background: rgba(255, 255, 255, 0.07);
+  }
+  
+  .metrics-card {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+  
+  .metrics-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #ffd700;
+  }
+  
+  .metrics-card p {
+    margin: 0.4rem 0;
+  }

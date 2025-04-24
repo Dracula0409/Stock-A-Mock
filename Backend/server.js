@@ -6,7 +6,7 @@ require('dotenv').config();
 
 const app = express();
 const db = require('./connection/db'); // Import your DB module
-const port = 3000;
+const port = 5001;
 
 const allowedOrigins = [
   "http://localhost:5173", 
@@ -30,14 +30,16 @@ app.use(cors({
 app.use(express.json());
 
 const userRoutes = require('./routes/user');
+const mailRoutes = require('./routes/mail');
 const dematRoutes = require('./routes/demat');
 const stockRoutes = require('./routes/stock');
 const transactionRoutes = require('./routes/transaction');
 const portfolioRoutes = require('./routes/portfolio'); 
 
-require('./jobs/stockUpdater');
+//require('./jobs/stockUpdater');
 
 app.use('/api/user', userRoutes);
+app.use('/api/mail', mailRoutes);
 app.use('/api/demat', dematRoutes);
 app.use('/api/stock', stockRoutes);
 app.use('/api/transaction', transactionRoutes);
@@ -48,7 +50,7 @@ app.use('/api/portfolio', portfolioRoutes);
   await db.initPool();
 })();
 
-app.listen(port, () => {
+app.listen(port, '0.0.0.0', () => {
   console.log(`🚀 Server running at http://localhost:${port}`);
 });
 
