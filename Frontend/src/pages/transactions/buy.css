@@ -4,9 +4,30 @@
     margin: auto;
     font-family: 'Segoe UI', sans-serif;
   }
+  
   h3{
     color: #000;
   }
+
+  p{
+    color: #000;
+  }
+
+  .back-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 16px;
+    font-weight: bold;
+  }
+  
+  .back-btn:hover {
+    background-color: #0056b3;
+  }
+
   .search-bar {
     padding: 0.5rem;
     width: 100%;

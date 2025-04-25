@@ -2,12 +2,12 @@ const oracledb = require('oracledb');
 
 exports.getPortfolio = async (req, res) => {
   const userId = req.user.user_id;
+  const connection = await oracledb.getConnection();
 
   try {
-    const connection = await oracledb.getConnection();
     // Fetch user holdings
     const result = await connection.execute(
-      `SELECT uh.SYMBOL, uh.QUANTITY, uh.AVERAGE_PRICE,
+      `SELECT uh.SYMBOL, uh.QUANTITY, uh.AVERAGE_PRICE, s.CURRENT_PRICE,
               (uh.QUANTITY * s.CURRENT_PRICE) AS CURRENT_VALUE
        FROM USER_HOLDINGS uh
        JOIN STOCKS s ON s.SYMBOL = uh.SYMBOL
@@ -16,10 +16,11 @@ exports.getPortfolio = async (req, res) => {
     );
 
     // Process the result into an array of holdings
-    const holdings = result.rows.map(([symbol, quantity, avgPrice, currentValue]) => ({
+    const holdings = result.rows.map(([symbol, quantity, avgPrice, currentPrice, currentValue]) => ({
       symbol,
       quantity,
       average_price: avgPrice,
+      current_price: currentPrice,
       current_value: currentValue
     }));
 
@@ -66,5 +67,13 @@ exports.getPortfolio = async (req, res) => {
   } catch (err) {
     console.error('Portfolio fetch error:', err);
     res.status(500).send('Error fetching portfolio');
+  } finally {
+    if (connection) {
+      try {
+        await connection.close(); // ✅ Release back to pool
+      } catch (closeErr) {
+        console.error('Error closing connection:', closeErr);
+      }
+    }
   }
 };

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './buy.css';
 
@@ -10,6 +11,7 @@ const Buy = () => {
   const [search, setSearch] = useState('');
   const [message, setMessage] = useState('');
   const [accountId, setAccountId] = useState(null);
+  const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
 
@@ -42,10 +44,13 @@ const Buy = () => {
         const ownedHoldings = portfolioRes.data.holdings || [];
         setOwned(ownedHoldings);
 
-        const columnNames = stocksRes.data.metaData.map(col => col.name);
-        const stockObjects = stocksRes.data.stocks.map(row =>
-          Object.fromEntries(row.map((val, i) => [columnNames[i], val]))
-        );
+        const stockObjects = stocksRes.data.stocks.map(row => ({
+          ID: row[0],
+          SYMBOL: row[1],
+          SECTOR: row[2],
+          CURRENT_PRICE: row[3],
+          LAST_UPDATED: row[4],
+        }));
 
         setAllStocks(stockObjects);
         setFilteredStocks(stockObjects);
@@ -56,6 +61,8 @@ const Buy = () => {
 
     fetchData();
   }, [token]);
+
+  const handleNav = (path) => navigate(path);
 
   const handleBuy = async (stock) => {
     const qty = quantities[stock.SYMBOL] || 0;
@@ -70,10 +77,13 @@ const Buy = () => {
         price: stock.CURRENT_PRICE,
       });
 
+      alert('Stock bought Successfully!');
+
       setMessage(`Bought ${qty} of ${stock.SYMBOL}`);
       setQuantities({ ...quantities, [stock.SYMBOL]: 0 });
     } catch (err) {
       console.error(err);
+      alert();
       setMessage(`Error buying stock: ${err.response?.data?.error || err.message}`);
     }
   };
@@ -90,6 +100,11 @@ const Buy = () => {
   return (
     <div className="buy-container">
       <h1>Buy Stocks</h1>
+
+      <button className="back-btn" onClick={() => handleNav('/dashboard')}>
+        ⬅ Back to Dashboard
+      </button>
+
       <input
         type="text"
         value={search}

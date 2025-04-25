@@ -50,5 +50,13 @@ exports.getMyDemat = async (req, res) => {
     res.json({ accounts: result.rows });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }finally {
+    if (conn) {
+      try {
+        await conn.close(); // ✅ Release back to pool
+      } catch (closeErr) {
+        console.error('Error closing connection:', closeErr);
+      }
+    }
   }
 };

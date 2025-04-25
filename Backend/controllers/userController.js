@@ -59,5 +59,13 @@ exports.login = async (req, res) => {
     res.json({ message: "success", token });
   } catch (err) {
     res.status(500).json({ error: err.message });
+  } finally {
+    if (connection) {
+      try {
+        await connection.close(); // ✅ Release back to pool
+      } catch (closeErr) {
+        console.error('Error closing connection:', closeErr);
+      }
+    }
   }
 };
