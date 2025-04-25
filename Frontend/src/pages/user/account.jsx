@@ -67,6 +67,7 @@ function Account() {
         <div className="account-card">
           <p><strong>Account ID:</strong> {account[0]}</p>
           <p><strong>User ID:</strong> {account[1]}</p>
+          <p><strong>Balance:</strong> {parseFloat(account[2]).toFixed(2)}</p>
           <p><strong>Created At:</strong> {new Date(account[3]).toLocaleString()}</p>
         </div>
       ) : (

@@ -37,7 +37,7 @@ const stockRoutes = require('./routes/stock');
 const transactionRoutes = require('./routes/transaction');
 const portfolioRoutes = require('./routes/portfolio'); 
 
-//require('./jobs/stockUpdater');
+require('./jobs/stockUpdater');
 
 app.use('/api/user', userRoutes);
 app.use('/api/mail', mailRoutes);

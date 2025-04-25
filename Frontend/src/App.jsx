@@ -7,7 +7,7 @@ import Signup from "./pages/signup/signup.jsx";
 import VerifyEmail from './pages/signup/verifyEmail.jsx';
 import Dashboard from "./pages/dashboard/portfolio.jsx";
 import Buy from "./pages/transactions/buy.jsx";
-//import Sell from "./pages/transactions/sell.jsx";
+import Sell from "./pages/transactions/sell.jsx";
 import Stocks from "./pages/stocks/stocks.jsx";
 import Account from "./pages/user/account.jsx";
 
@@ -23,11 +23,9 @@ function App() {
         <Route path="/signup" element={ <Signup/> } />
         <Route path="/verifyEmail" element={ <VerifyEmail/> } />
         <Route path="/buy" element={ <Buy/> } />
+        <Route path="/sell" element={ <Sell/> } />
         <Route path="/account" element={ <Account/> } />
         <Route path="/search" element={ <Stocks/> } />
-        {/*
-        <Route path="/sell" element={ <Sell/> } />
-        */}
       </Routes>
     </Router>
   );

@@ -7,7 +7,7 @@ exports.getPortfolio = async (req, res) => {
   try {
     // Fetch user holdings
     const result = await connection.execute(
-      `SELECT uh.SYMBOL, uh.QUANTITY, uh.AVERAGE_PRICE, s.CURRENT_PRICE,
+      `SELECT uh.SYMBOL, uh.QUANTITY, uh.AVERAGE_PRICE, s.CURRENT_PRICE, s.STOCK_ID,
               (uh.QUANTITY * s.CURRENT_PRICE) AS CURRENT_VALUE
        FROM USER_HOLDINGS uh
        JOIN STOCKS s ON s.SYMBOL = uh.SYMBOL
@@ -16,11 +16,12 @@ exports.getPortfolio = async (req, res) => {
     );
 
     // Process the result into an array of holdings
-    const holdings = result.rows.map(([symbol, quantity, avgPrice, currentPrice, currentValue]) => ({
+    const holdings = result.rows.map(([symbol, quantity, avgPrice, currentPrice, stockId, currentValue]) => ({
       symbol,
       quantity,
       average_price: avgPrice,
       current_price: currentPrice,
+      stock_id: stockId,
       current_value: currentValue
     }));
 
