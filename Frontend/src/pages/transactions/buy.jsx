@@ -122,7 +122,7 @@ const Buy = () => {
             <div key={stock.symbol} className="stock-card">
               <h3>{stock.symbol}</h3>
               <p>Owned: {stock.quantity}</p>
-              <p>Current Price: ₹{stock.current_price}</p>
+              <p>Current Price: ${stock.current_price}</p>
               <input
                 type="number"
                 placeholder="Qty"
@@ -144,7 +144,7 @@ const Buy = () => {
         {filteredStocks.map((stock) => (
           <div key={stock.ID} className="stock-card">
             <h3>{stock.SYMBOL}</h3>
-            <p>Current Price: ₹{stock.CURRENT_PRICE}</p>
+            <p>Current Price: ${stock.CURRENT_PRICE}</p>
             <input
               type="number"
               placeholder="Qty"

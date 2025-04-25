@@ -41,6 +41,51 @@ exports.register = async (req, res) => {
   }
 };
 
+exports.updatePassword = async (req, res) => {
+  const { email, newPassword } = req.body;
+  const conn = await oracledb.getConnection();
+  const newHash = await bcrypt.hash(newPassword, 10);
+
+  try {
+    const result = await conn.execute(
+      `UPDATE Users SET password_hash = :p WHERE email = :e`,
+      { p: newHash, e: email },
+      { autoCommit: true }
+    );
+
+    if (result.rowsAffected === 0) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    res.status(200).json({ msg: "Password updated successfully" });
+  } catch (err) {
+    console.error("Update Password Error:", err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.updateUsername = async (req, res) => {
+  const { email, newUsername } = req.body;
+  const conn = await oracledb.getConnection();
+
+  try {
+    const result = await conn.execute(
+      `UPDATE Users SET username = :u WHERE email = :e`,
+      { u: newUsername, e: email },
+      { autoCommit: true }
+    );
+
+    if (result.rowsAffected === 0) {
+      return res.status(404).json({ msg: "User not found" });
+    }
+
+    res.status(200).json({ msg: "Username updated successfully" });
+  } catch (err) {
+    console.error("Update Username Error:", err);
+    res.status(500).json({ error: err.message });
+  }
+};
+
 exports.login = async (req, res) => {
   const { email, password } = req.body;
   const conn = await oracledb.getConnection();

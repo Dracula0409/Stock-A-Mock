@@ -90,7 +90,7 @@ function Login(){
   
   async function checkEmailExists(email) {
     try {
-      const res = await fetch('http://localhost:5001/api/auth/check-email', {
+      const res = await fetch('http://localhost:5001/api/user/check', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
@@ -103,7 +103,7 @@ function Login(){
       } else {
         // Email does not exist, prompt user to sign up
         if (confirm("Email not found. Would you like to sign up?")) {
-          navigate('/signup');
+          navigate('/signup', {replace: true});
         }
       }
     } catch (err) {
@@ -113,7 +113,7 @@ function Login(){
 
   function handleSignUp(){
     console.log("working...");
-    navigate('/signup');
+    navigate('/signup', {replace: true});
   }
 
   return(
@@ -126,7 +126,7 @@ function Login(){
         <div className="credentials-input-box">
 
           <div className="username-input-box">
-            <label  className="username-label" htmlFor="username">Username</label>
+            <label  className="username-label" htmlFor="username">E-mail</label>
             <input className="username" id="username" type="text" placeholder="username" onChange={handleEmailChange}></input>
           </div>
 

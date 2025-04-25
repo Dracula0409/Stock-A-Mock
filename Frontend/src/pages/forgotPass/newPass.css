@@ -3,6 +3,10 @@ body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
   }
   
+  .verify-box h2{
+    color: #333;
+  }
+
   .container {
     display: flex;
     justify-content: center;

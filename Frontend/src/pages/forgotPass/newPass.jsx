@@ -58,21 +58,21 @@ useEffect(() => {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5001/api/auth/update", {
+      const res = await fetch("http://localhost:5001/api/user/updatePass", {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email, password: password }),
+        body: JSON.stringify({ email: email, newPassword: password }),
       });
-
+    
       const data = await res.json();
-      if (data.message === "Password updated successfully.") {
+      if (data.msg === "Password updated successfully") {
         alert("Password successfully updated.");
         navigate("/login", {
           replace: true,
           state: null,
-        }); 
+        });
       } else {
-        alert(data.message);
+        alert(data.msg || "Unexpected error.");
       }
     } catch (err) {
       console.error("Error resetting password:", err);
@@ -93,13 +93,15 @@ useEffect(() => {
             required
           />
 
-          <ul className="checklist">
-            <li className={validationChecks.length ? "valid" : "invalid"}>At least 8 characters</li>
-            <li className={validationChecks.lowercase ? "valid" : "invalid"}>1 lowercase letter</li>
-            <li className={validationChecks.uppercase ? "valid" : "invalid"}>1 uppercase letter</li>
-            <li className={validationChecks.number ? "valid" : "invalid"}>1 number</li>
-            <li className={validationChecks.symbol ? "valid" : "invalid"}>1 symbol (e.g. !@#$%)</li>
-          </ul>
+          {password && (
+            <ul className="checklist">
+              <li className={validationChecks.length ? "valid" : "invalid"}>At least 8 characters</li>
+              <li className={validationChecks.lowercase ? "valid" : "invalid"}>1 lowercase letter</li>
+              <li className={validationChecks.uppercase ? "valid" : "invalid"}>1 uppercase letter</li>
+              <li className={validationChecks.number ? "valid" : "invalid"}>1 number</li>
+              <li className={validationChecks.symbol ? "valid" : "invalid"}>1 symbol (e.g. !@#$%)</li>
+            </ul>
+          )}
 
           <label>Confirm Password</label>
           <input

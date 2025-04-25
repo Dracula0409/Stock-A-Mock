@@ -45,6 +45,14 @@ body {
   .sell   { background-color: #22c55e; }
   .search { background-color: #eab308; }
   .account{ background-color: #6b7280; }
+
+  .logout {
+    background-color: #ef4444;
+  }
+  
+  .logout:hover {
+    background-color: #dc2626;
+  }
   
   .btn:hover {
     transform: scale(1.05);

@@ -32,6 +32,13 @@ const Dashboard = () => {
 
   const handleNav = (path) => navigate(path);
 
+  const handleLogout = () => {
+    if (window.confirm("Are you sure you want to logout?")) {
+      localStorage.removeItem('token');
+      navigate('/', {replace: true});
+    }
+  };
+
   if (loading) return <div className="loading">Loading your portfolio...</div>;
   if (error) return <div className="error">{error}</div>;
 
@@ -44,6 +51,7 @@ const Dashboard = () => {
           <button onClick={() => handleNav('/sell')} className="btn sell">Sell</button>
           <button onClick={() => handleNav('/search')} className="btn search">Search</button>
           <button onClick={() => handleNav('/account')} className="btn account">Account</button>
+          <button onClick={handleLogout} className="btn logout">Logout</button>
         </div>
       </nav>
 
@@ -68,8 +76,8 @@ const Dashboard = () => {
                 <tr key={idx} className="table-row">
                   <td>{stock.symbol}</td>
                   <td>{stock.quantity}</td>
-                  <td>₹{stock.average_price.toFixed(2)}</td>
-                  <td>₹{stock.current_value.toFixed(2)}</td>
+                  <td>${stock.average_price.toFixed(2)}</td>
+                  <td>${stock.current_value.toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
@@ -79,7 +87,7 @@ const Dashboard = () => {
             <h3>Predictions & Metrics</h3>
             <p><strong>XIRR:</strong> {portfolio.xirr.toFixed(2)}%</p>
             <p><strong>CAGR:</strong> {portfolio.cagr.toFixed(2)}%</p>
-            <p><strong>Predicted Price (30 days):</strong> ₹{portfolio.predicted_price.toFixed(2)}</p>
+            <p><strong>Predicted Price (30 days):</strong> ${portfolio.predicted_price.toFixed(2)}</p>
             <p><strong>Predicted CAGR:</strong> {portfolio.predicted_cagr.toFixed(2)}%</p>
           </div>
         </div>

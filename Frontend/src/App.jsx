@@ -8,8 +8,8 @@ import VerifyEmail from './pages/signup/verifyEmail.jsx';
 import Dashboard from "./pages/dashboard/portfolio.jsx";
 import Buy from "./pages/transactions/buy.jsx";
 //import Sell from "./pages/transactions/sell.jsx";
-//import Stocks from "./pages/stocks/stocks.jsx";
-//import Account from "./pages/user/account.jsx";
+import Stocks from "./pages/stocks/stocks.jsx";
+import Account from "./pages/user/account.jsx";
 
 function App() {
   return (
@@ -23,10 +23,10 @@ function App() {
         <Route path="/signup" element={ <Signup/> } />
         <Route path="/verifyEmail" element={ <VerifyEmail/> } />
         <Route path="/buy" element={ <Buy/> } />
+        <Route path="/account" element={ <Account/> } />
+        <Route path="/search" element={ <Stocks/> } />
         {/*
         <Route path="/sell" element={ <Sell/> } />
-        <Route path="/search" element={ <Stocks/> } />
-        <Route path="/account" element={ <Account/> } />
         */}
       </Routes>
     </Router>

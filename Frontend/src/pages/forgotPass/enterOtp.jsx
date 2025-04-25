@@ -91,7 +91,7 @@ function enterOTP(){
       console.log("Generating OTP for email:", email);
 
       try {
-        const res = await fetch('http://localhost:5001/api/auth/send_recovery_email',{
+        const res = await fetch('http://localhost:5001/api/mail/signupEmail',{
           method: 'POST',
           headers: { 'Content-Type' : 'application/json' },
           body: JSON.stringify({ recepient_email: email, OTP: otp }),

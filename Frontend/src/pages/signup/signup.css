@@ -1,320 +1,184 @@
-body{
-    margin:0px;
-  }
-  
-  .page-body{
-    height:100vh;
-    width:100%;
-    margin:0;
-    overflow:hidden;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    font-family:sans-serif;
-  
-    background: linear-gradient(to right, rgb(4, 47, 68) 10%, black);
-  }
-  
-  .signup-box{
-  
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  
-    border-radius:26px;
-    border:1px solid rgb(255, 254, 254);
-    box-shadow: 0 0 10px grey;
-    
-    background: rgba(255, 255, 255, 0.14);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-  }
-  
-  .new-account{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    margin:10px;
-    padding:8px;
-    font-size:1.6rem;
-    font-weight:700;
-    color:black
-  }
-  
-  .user-input-box{
-    display:flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    display:flex;
-    flex-direction:column;
-    align-items: center;
-    justify-content: space-around;
-  }
+body {
+  margin: 0;
+}
 
-  .name-box{
-    display:flex;
-    justify-content: space-between;
-    flex-direction: column;
-    padding:10px;
-    margin-bottom:10px;
-  }
-  
-  .email-box{
-    display:flex;
-    justify-content: space-between;
-    flex-direction: column;
-    padding:10px;
-    margin-bottom:10px;
-  }
-  
-  .name-box label{
-    color:white;
-  }
+.page-body {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  overflow: auto;
+}
 
-  .email-box label{
-    color:white;
-  }
+.signup-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  border: 2px solid #fff;
+  padding: 38px 36px 28px 36px;
+  max-width: 400px;
+  width: 100%;
+  margin: 24px;
+}
 
-  .name{
-    width:320px;
-    height:30px;
-    margin-top:8px;
-    padding:8px;
-    border-radius: 6px;
-    border-width:1px;
-    font-size:16px;
-    font-size:17px;
-    outline:none;
-    background-color:hsla(0, 0%, 100%, 0.644);
-    transition:all 0.2s ease-in-out;
-  }
-  
-  .email{
-    width:320px;
-    height:30px;
-    margin-top:8px;
-    padding:8px;
-    border-radius: 6px;
-    border-width:1px;
-    font-size:16px;
-    font-size:17px;
-    outline:none;
-    background-color:hsla(0, 0%, 100%, 0.644);
-    transition:all 0.2s ease-in-out;
-  }
-  
-  .email:hover{
-      box-shadow:1px 1px 5px 2px rgb(77, 78, 79);
-  }
-  
-  .email:focus{
-    outline:2px solid rgb(16, 201, 16);
-    box-shadow:none;
-  }
-  
-  .email::placeholder{
-    color:rgb(69, 67, 67);
-  }
-  
-  .password-box{
-    display:flex;
-    justify-content: space-between;
-    flex-direction: column;
-    padding:10px;
-    margin-bottom:10px;
-  
-  }
-  
-  .password-box label{
-    color:white;
-  }
-  
-  .password{
-    width:320px;
-    height:30px;
-    margin-top:8px;
-    padding:8px;
-    border-radius: 6px;
-    border-width:1px;
-    font-size:18px;
-    outline:none;
-    background-color:hsla(0, 0%, 100%, 0.644);
-    transition:all 0.2s ease-in-out;
-  }
-  
-  .password:hover{
-    box-shadow:1px 1px 5px 2px rgb(77, 78, 79);
-  }
-  
-  .password:focus{
-    outline:2px solid rgb(245, 30, 30);
-    box-shadow:none;
-  }
-  
-  .password::placeholder{
-    color:rgb(69, 67, 67);
-  }
-  
-  .confirm-pass-box{
-    display:flex;
-    justify-content: space-around;
-    flex-direction: column;
-    padding:10px;
-    margin-bottom:10px;
-  }
-  
-  .confirm-pass-box label{
-    color:white;
-  }
-  
-  .confirm-password{
-    width:320px;
-    margin-top:8px;
-    height:30px;
-    padding:8px;
-    border-radius: 6px;
-    border-width:1px;
-    font-size:18px;
-    outline:none;
-    background-color:hsla(0, 0%, 100%, 0.644);
-    transition:all 0.2s ease-in-out;
-  }
-  
-  .confirm-password:hover{
-    box-shadow:1px 1px 5px 2px rgb(77, 78, 79);
-  }
-  
-  .confirm-password:focus{
-    outline:2px solid rgb(245, 30, 30);
-    box-shadow:none;
-  }
-  
-  .confirm-password::placeholder{
-    color:rgb(69, 67, 67);
-  }
-  
-  .signup-btn{
-    background-color: black;
-    color:white;
-    padding:10px;
-    font-size:1.1rem;
-    border:none;
-    border-radius:8px;
-    transition:all 0.2s ease-in-out;
-  
-  }
-  
-  .signup-btn:hover{
-    color:black;
-    background-color: white;
-    font-weight:600;
-    box-shadow: 0 0 5px grey;
-  
-  }
-  
-  .signup-btn:active{
-    background-color:rgb(69, 68, 68);
-    color:white;
-  }
-  
-  .Terms-box{
-    width:250px;
-  } 
-  
-  .terms{
-    font-size:14px;
-    text-align: center;
-  }
-  
-  .terms b{
-    color:rgb(0, 0, 0);
-  }
-  
-  .terms b:hover{
-    text-decoration: underline;
-  }
-  
-  .sign-in-option b{
-    color:rgb(15, 193, 15);
-  }
-  
-  .sign-in-option b:hover{
-    text-decoration: underline;
-  }
-  
-  .email-error,
-  .password-error,
-  .confirmPassword-error{
-    color: #ff0000; 
-    font-size: 0.875rem; 
-    margin-top: 0.25rem;
-    margin-bottom: 0px; 
-    position: relative;
-    padding: 0.6rem;
-    background-color: #ffebee;
-    border-radius: 4px;
-    border: 1px solid #ff0000;
-    width:180px;
-  }
-  
-  .email-error::before,
-  .password-error::before,
-  .confirmPassword-error::before {
-    content: '';
-    position: absolute;
-    top: -10px;
-    left: 10px; 
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #ff0000 transparent;
-  }
-  
-  .email-error::after,
-  .password-error::after,
-  .confirmPassword-error::after {
-    content: '';
-    position: absolute;
-    top: -8px; 
-    left: 10px; 
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent transparent #ffebee transparent; /
-  }
-  
-  .checklist {
-    list-style: none;
-    padding-left: 0;
-    margin-top: 10px;
-    text-align: left;
-  }
-  
-  .checklist li {
-    font-size: 14px;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-  }
-  
-  .checklist li::before {
-    content: '✓';
-    display: inline-block;
-    margin-right: 8px;
-    color: green;
-    font-weight: bold;
-  }
-  
-  .checklist li.invalid::before {
-    content: '✖';
-    color: red;
-  }
-  .checklist li.invalid {
-    color: red;
-  }
-  
-  .checklist li.valid {
-    color: green;
-  }
+.new-account {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.user-input-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.name-box,
+.email-box,
+.password-box,
+.confirm-pass-box {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+
+.name-box label,
+.email-box label,
+.password-box label,
+.confirm-pass-box label {
+  color: #fff;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.name,
+.email,
+.password,
+.confirm-password {
+  width: 100%;
+  height: 38px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.85);
+  transition: border 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+}
+
+.name:focus,
+.email:focus,
+.password:focus,
+.confirm-password:focus {
+  border: 2px solid #fff;
+  outline: none;
+  box-shadow: 0 0 4px #fff;
+}
+
+.checklist {
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0 0 0;
+}
+
+.checklist li {
+  font-size: 0.95rem;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  color: #ff4444;
+}
+
+.checklist li.valid {
+  color: #18c918;
+}
+
+.checklist li::before {
+  content: '✖';
+  margin-right: 8px;
+  color: #ff4444;
+  font-size: 1.1em;
+}
+
+.checklist li.valid::before {
+  content: '✓';
+  color: #18c918;
+}
+
+.signUp-btn {
+  background: #000;
+  color: #fff;
+  padding: 11px 0;
+  font-size: 1.12rem;
+  border: none;
+  border-radius: 8px;
+  width: 100%;
+  margin: 16px 0 12px 0;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.signUp-btn:hover {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 0 6px #aaa;
+}
+
+.Terms-box {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.terms {
+  font-size: 0.95rem;
+  text-align: center;
+  color: #d8e0e3;
+}
+
+.terms b {
+  color: #fff;
+  font-weight: 600;
+}
+
+.terms b:hover {
+  text-decoration: underline;
+}
+
+.sign-in-option {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.sign-in-option b {
+  color: #18c918;
+  cursor: pointer;
+}
+
+.sign-in-option b:hover {
+  text-decoration: underline;
+}
+
+.email-error,
+.password-error,
+.confirmPassword-error {
+  color: #ff4444;
+  background: #fff0f0;
+  border: 1px solid #ff4444;
+  border-radius: 4px;
+  font-size: 0.93rem;
+  margin-top: 6px;
+  padding: 5px 10px;
+}
+
+.errorMessage p {
+  color: #ff4444;
+  font-size: 0.95rem;
+  margin: 3px 0 0 0;
+}

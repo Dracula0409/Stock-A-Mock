@@ -6,7 +6,7 @@ function Signup() {
   const navigate = useNavigate();
 
   function goToLogin() {
-    navigate("/login");
+    navigate("/login",{replace: true});
   }
 
   const [name, setName] = useState("");
@@ -166,7 +166,7 @@ function Signup() {
           </div>
 
           <div className="email-box">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">E-mail</label>
             <input
               value={email}
               className="email"
@@ -193,13 +193,16 @@ function Signup() {
             )}
           </div>
 
-          <ul className="checklist">
-            <li className={validationChecks.length ? "valid" : "invalid"}>At least 8 characters</li>
-            <li className={validationChecks.lowercase ? "valid" : "invalid"}>1 lowercase letter</li>
-            <li className={validationChecks.uppercase ? "valid" : "invalid"}>1 uppercase letter</li>
-            <li className={validationChecks.number ? "valid" : "invalid"}>1 number</li>
-            <li className={validationChecks.symbol ? "valid" : "invalid"}>1 symbol (e.g. !@#$%)</li>
-          </ul>
+          {password && (
+            <ul className="checklist">
+              <li className={validationChecks.length ? "valid" : "invalid"}>At least 8 characters</li>
+              <li className={validationChecks.lowercase ? "valid" : "invalid"}>1 lowercase letter</li>
+              <li className={validationChecks.uppercase ? "valid" : "invalid"}>1 uppercase letter</li>
+              <li className={validationChecks.number ? "valid" : "invalid"}>1 number</li>
+              <li className={validationChecks.symbol ? "valid" : "invalid"}>1 symbol (e.g. !@#$%)</li>
+            </ul>
+          )}
+
 
           <div className="confirm-pass-box">
             <label htmlFor="conf-pass">Confirm</label>
@@ -226,7 +229,7 @@ function Signup() {
 
           <button
             disabled={isSignupDisabled}
-            className="signup-btn"
+            className="signUp-btn"
             onClick={handleSignUp}
           >
             Sign Up

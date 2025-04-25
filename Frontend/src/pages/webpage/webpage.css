@@ -55,13 +55,16 @@
     border-radius: 12px;
     cursor: pointer;
     transition: 0.3s;
+  }
+  
+  .login-btn {
     background: #00c9a7;
     color: #fff;
     box-shadow: 0 4px 10px rgba(0, 201, 167, 0.3);
   }
-  
   .signup-btn {
     background: #ff6b6b;
+    color: #fff;
     box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
   }
   
