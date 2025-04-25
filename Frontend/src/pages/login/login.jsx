@@ -10,6 +10,26 @@ function Login(){
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      fetch('http://localhost:5001/api/demat/me', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then(res => {
+          if (res.ok) {
+            navigate('/dashboard', { replace: true });
+          }
+        })
+        .catch(err => console.error("Token check failed", err));
+    }
+
+    generateCaptcha();
+  }, []);
+
   async function handleLogIn() {
     if (captcha !== gcaptcha) {
       alert("Wrong Captcha");
@@ -43,7 +63,9 @@ function Login(){
         localStorage.setItem("token", data.token); // Optional
         alert("Account logged in!");
         setTimeout(() => {
-          navigate('/dashboard');
+          navigate('/dashboard', {
+            replace: true
+          });
         }, 1500);
       } else {
         alert("Unexpected response from server");
@@ -54,10 +76,6 @@ function Login(){
       alert("Network error or server unreachable. Please try again later.");
     }
   }
-
-  useEffect(() => {
-    generateCaptcha();
-  }, []);
 
   function generateCaptcha(length = 6) {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
