@@ -84,37 +84,6 @@ exports.updatePassword = async (req, res) => {
   }
 };
 
-exports.updateUsername = async (req, res) => {
-  let conn;
-  try {
-    const { email, newUsername } = req.body;
-    conn = await oracledb.getConnection();
-
-    const result = await conn.execute(
-      `UPDATE Users SET username = :u WHERE email = :e`,
-      { u: newUsername, e: email },
-      { autoCommit: true }
-    );
-
-    if (result.rowsAffected === 0) {
-      return res.status(404).json({ msg: "User not found" });
-    }
-
-    res.status(200).json({ msg: "Username updated successfully" });
-  } catch (err) {
-    console.error("Update Username Error:", err);
-    res.status(500).json({ error: err.message });
-  } finally {
-    if (conn) {
-      try {
-        await conn.close();
-      } catch (closeErr) {
-        console.error('Error closing connection:', closeErr);
-      }
-    }
-  }
-};
-
 exports.login = async (req, res) => {
   let conn;
   try {
