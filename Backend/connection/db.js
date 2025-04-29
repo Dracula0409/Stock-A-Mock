@@ -2,7 +2,7 @@ const oracledb = require('oracledb');
 require('dotenv').config();
 
 oracledb.initOracleClient({
-  libDir: '/Users/jeffinasir/oracle/instantclient_19_8'//Use the path for instantclient in your own machine
+  libDir: process.env.DB_LibDir //Use the path for instantclient in your own machine
 });
 
 async function initPool() {

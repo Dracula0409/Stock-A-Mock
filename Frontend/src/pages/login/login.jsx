@@ -78,7 +78,7 @@ function Login(){
   }
 
   function generateCaptcha(length = 6) {
-    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const chars = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789";
     let capt=""
     for (let i = 0; i < length; i++) {
         capt += chars.charAt(Math.floor(Math.random() * chars.length));
