@@ -1,3 +1,126 @@
+# Docker_Image_Setup_for_DB (MacOS)
+
+# pre-req
+
+1. Install Docker Desktop for Mac
+
+2. Verify Docker is working:
+   docker version
+
+🐳 Step 1: Pull the Oracle XE 21c Image
+
+    docker pull gvenzl/oracle-xe:21-slim
+
+    --This downloads a slim version (~2 GB compressed, ~10 GB used on disk).
+
+🐳 Step 2: Run the Oracle Database Container
+
+    docker volume create oracle-xe-data
+
+    -- To avoid losing data when you stop/remove the container:
+
+    docker run -d \
+      --name oracle-xe \
+      -p 1521:1521 -p 8080:8080 \
+      -v oracle-xe-data:/opt/oracle/oradata \
+      -e ORACLE_PASSWORD=SqlPlusDB \
+      gvenzl/oracle-xe:21-slim
+
+🔍 Step 3: Test the Container
+
+      docker ps
+      docker logs -f oracle-xe
+
+      Look for a line like:
+      DATABASE IS READY TO USE!
+
+🛠️ Step 4: Connect to Oracle
+
+      docker exec -it oracle-xe sqlplus system/SqlPlusDB@//localhost/XEPDB1
+
+      (or)
+
+      sqlplus system/SqlPlusDB@//localhost/XEPDB1
+
+# Insertion_of_Tables (OracleSQL)
+
+CREATE TABLE Stocks (
+stock_id NUMBER PRIMARY KEY,
+symbol VARCHAR2(10) UNIQUE NOT NULL,
+company_name VARCHAR2(100),
+current_price NUMBER,
+last_updated TIMESTAMP
+);
+
+CREATE TABLE Users (
+user_id NUMBER PRIMARY KEY,
+username VARCHAR2(50) UNIQUE NOT NULL,
+email VARCHAR2(100) UNIQUE NOT NULL,
+password_hash VARCHAR2(255) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE DematAccounts (
+account_id NUMBER PRIMARY KEY,
+user_id NUMBER REFERENCES Users(user_id) ON DELETE CASCADE,
+balance NUMBER DEFAULT 100000, -- starting mock balance
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Transactions (
+txn_id NUMBER PRIMARY KEY,
+account_id NUMBER REFERENCES DematAccounts(account_id) ON DELETE CASCADE,
+stock_id NUMBER REFERENCES Stocks(stock_id) ON DELETE CASCADE,
+quantity NUMBER,
+price_at_txn NUMBER,
+txn_type VARCHAR2(4) CHECK (txn_type IN ('BUY', 'SELL')),
+txn_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE USER_HOLDINGS (
+HOLDING_ID NUMBER PRIMARY KEY,
+USER_ID NUMBER REFERENCES USERS(USER_ID),
+SYMBOL VARCHAR2(10),
+QUANTITY NUMBER CHECK (QUANTITY >= 0),
+AVERAGE_PRICE NUMBER,
+UNIQUE (USER_ID, SYMBOL)
+);
+
+CREATE VIEW Portfolio AS
+SELECT
+da.account*id,
+s.symbol,
+s.company_name,
+SUM(CASE WHEN t.txn_type = 'BUY' THEN t.quantity
+WHEN t.txn_type = 'SELL' THEN -t.quantity ELSE 0 END) AS quantity_held,
+SUM(CASE WHEN t.txn_type = 'BUY' THEN t.quantity * t.price*at_txn
+WHEN t.txn_type = 'SELL' THEN -t.quantity * t.price_at_txn ELSE 0 END) AS invested_value
+FROM
+Transactions t
+JOIN DematAccounts da ON t.account_id = da.account_id
+JOIN Stocks s ON t.stock_id = s.stock_id
+GROUP BY da.account_id, s.symbol, s.company_name;
+
+# Sequence_for_Tables (OracleSQL)
+
+CREATE SEQUENCE stocks_seq
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+# Trigger_to_assign_Primary_Key (OracleSQL)
+
+CREATE OR REPLACE TRIGGER trg_stocks_id
+BEFORE INSERT ON Stocks
+FOR EACH ROW
+WHEN (NEW.stock_id IS NULL)
+BEGIN
+SELECT stocks_seq.NEXTVAL INTO :NEW.stock_id FROM dual;
+END;
+/
+
+---
+
 # Buy_Stock (PL/SQL) :
 
 CREATE OR REPLACE PROCEDURE buy_stock (
@@ -304,8 +427,8 @@ FOR tx IN (
 SELECT
 TXN_TIME,
 CASE
-WHEN TXN_TYPE = 'BUY' THEN -1 * (QUANTITY \_ PRICE_AT_TXN)
-WHEN TXN_TYPE = 'SELL' THEN QUANTITY \* PRICE_AT_TXN
+WHEN TXN_TYPE = 'BUY' THEN -1 * (QUANTITY _ PRICE_AT_TXN)
+WHEN TXN_TYPE = 'SELL' THEN QUANTITY _ PRICE_AT_TXN
 END AS cash_flow
 FROM TRANSACTIONS
 WHERE ACCOUNT_ID = v_account_id
