@@ -17,7 +17,7 @@
 
     docker volume create oracle-xe-data
 
-    -- To avoid losing data when you stop/remove the container:
+    -- To avoid losing data when you stop/remove the container:-
 
     docker run -d \
       --name oracle-xe \
